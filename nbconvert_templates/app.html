@@ -1,0 +1,110 @@
+{% raw -%}
+<div id="app" style="display: none" class=".vuetify-styles" vuetify-overlay>
+    <v-app>
+        <v-layout v-if="loading" align-center justify-center>
+            <v-card class="pa-2">
+                <v-progress-linear indeterminate></v-progress-linear>
+
+                <v-card-title primary-title>
+                    <h1>Loading</h1>
+                </v-card-title>
+            </v-card>
+        </v-layout>
+        <v-layout v-else>
+            <v-navigation-drawer :permanent="!autoHideNavBar" :temporary="autoHideNavBar" v-model="showNavBar" absolute app>
+                <v-toolbar flat>
+                    <v-list>
+                        <v-list-tile>
+                            <v-list-tile-title class="title">
+                                Notebooks
+                            </v-list-tile-title>
+                        </v-list-tile>
+                    </v-list>
+                </v-toolbar>
+
+                <v-switch v-model="autoHideNavBar" label="Auto hide"></v-switch>
+
+                <v-divider></v-divider>
+                <v-divider></v-divider>
+
+                <v-list dense class="pt-0">
+                    <v-list-tile v-for="item in items" :key="item.title" :href="item.url"
+                                 :class="item.current ? 'primary--text' : ''">
+                        <v-list-tile-action>
+                            <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-tile-action>
+
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list>
+            </v-navigation-drawer>
+            <v-toolbar app absolute>
+                <v-toolbar-side-icon
+                        v-if="autoHideNavBar"
+                        @click.stop="showNavBar = !showNavBar"
+                ></v-toolbar-side-icon>
+                <v-toolbar-title>{{ title }}</v-toolbar-title>
+            </v-toolbar>
+
+            <v-content>
+                <v-container grid-list-md>
+                    <v-layout row wrap align-center>
+                        <v-flex xs12>
+                            <jupyter-widget-mount-point mount-id="widget1">
+                                <v-chip color="red">here is where the widget1 should come</v-chip>
+                            </jupyter-widget-mount-point>
+                        </v-flex>
+                        <v-flex xs12>
+                            <jupyter-widget-mount-point mount-id="widget2">
+                                here is where the widget2 should come
+                            </jupyter-widget-mount-point>
+                        </v-flex>
+                        <v-flex xs12>
+                            <jupyter-widget-mount-point mount-id="vbtn1"></jupyter-widget-mount-point>
+                        </v-flex>
+                        <v-flex xs12>
+                             <v-slider thumb-label='always'></v-slider>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-content>
+        </v-layout>
+    </v-app>
+</div>
+
+<script>
+
+var app = new Vue({
+    el: '#app',
+    mounted() {
+        document.querySelector('#app').removeAttribute("style");
+        if(localStorage.autoHideNavBar) {
+            this.autoHideNavBar = JSON.parse(localStorage.autoHideNavBar);
+            this.showNavBar = !this.autoHideNavBar
+        }
+    },
+    watch: {
+        autoHideNavBar(value) {
+            localStorage.autoHideNavBar = value
+        },
+    },
+    data() {
+        return {
+            showSettings: true,
+            showNavBar: false,
+            autoHideNavBar: true,
+            loading: true,
+            right: null,
+            url: 'https://www.w3schools.com/',
+            items: [
+                {icon: "fingerprint", title: "hoi", url: "nu.nl", current: true}
+            ],
+            title: 'hoi',
+        }
+    }
+});
+
+</script>
+{% endraw -%}
