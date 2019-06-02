@@ -49,7 +49,8 @@ def user_dir():
 
 class DevelopCmd(develop):
     prefix_targets = [
-        ("voila/templates", 'voila-vuetify')
+        ("voila/templates", 'vuetify-base'),
+        ("voila/templates", 'vuetify-default')
     ]
     def run(self):
         target_dir = os.path.join(sys.prefix, 'share', 'jupyter')
@@ -64,8 +65,10 @@ class DevelopCmd(develop):
             if not os.path.exists(target_subdir):
                 os.makedirs(target_subdir)
             rel_source = os.path.relpath(os.path.abspath(source), os.path.abspath(target_subdir))
-            if os.path.exists(target):
+            try:
                 os.remove(target)
+            except:
+                pass
             print(rel_source, '->', target)
             os.symlink(rel_source, target)
 
