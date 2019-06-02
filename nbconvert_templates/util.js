@@ -6,6 +6,7 @@ Vue.component('jupyter-widget-mount-point', {
     data() {
         return {
             renderFn: undefined,
+            elem: undefined,
         }
     },
     props: ['mount-id'],
@@ -31,7 +32,11 @@ Vue.component('jupyter-widget-mount-point', {
     },
     render(createElement) {
         if (this.renderFn) {
-            return this.renderFn(createElement);
+            /* workaround for v-menu click */
+            if (!this.elem) {
+                this.elem = this.renderFn(createElement);
+            }
+            return this.elem;
         }
         return createElement('div', this.$slots.default ||
             [createElement('v-chip' ,`[${this.mountId}]`)]);
