@@ -1,0 +1,36 @@
+{% raw -%}
+<div id="app" style="display: none">
+    <v-app >
+        <v-layout v-if="loading" align-center justify-center>
+            <v-card class="pa-2">
+                <v-progress-linear indeterminate></v-progress-linear>
+
+                <v-card-title primary-title>
+                    <h1>Loading</h1>
+                </v-card-title>
+            </v-card>
+        </v-layout>
+        <v-layout v-else>
+                <jupyter-widget-mount-point mount-id="content">
+                    A widget with mount-id="content" should go here
+                </jupyter-widget-mount-point>
+        </v-layout>
+    </v-app>
+</div>
+
+<script>
+
+var app = new Vue({
+    el: '#app',
+    mounted() {
+        document.querySelector('#app').removeAttribute("style");
+    },
+    data() {
+        return {
+            loading: true
+        }
+    }
+});
+
+</script>
+{% endraw -%}
