@@ -11,12 +11,12 @@
             </v-card>
         </v-layout>
         <v-layout v-else>
-            <v-navigation-drawer :permanent="!autoHideNavBar" :temporary="autoHideNavBar" v-model="showNavBar" absolute app>
+            <v-navigation-drawer v-model="showNavBar" absolute app>
                 <v-toolbar flat>
                     <v-list>
                         <v-list-tile>
                             <v-list-tile-title class="title">
-                                Notebooks
+                                Navigation
                             </v-list-tile-title>
                         </v-list-tile>
                     </v-list>
@@ -25,9 +25,6 @@
                 <v-divider></v-divider>
 
                 <v-list dense class="pt-0">
-                    <v-list-tile>
-                        <v-switch v-model="autoHideNavBar" label="Auto hide"></v-switch>
-                    </v-list-tile>
                     <v-list-tile v-for="item in items" :key="item.title" :href="item.url"
                                  :class="item.current ? 'primary--text' : ''">
                         <v-list-tile-action>
@@ -42,7 +39,7 @@
             </v-navigation-drawer>
             <v-toolbar app absolute>
                 <v-toolbar-side-icon
-                        v-if="autoHideNavBar"
+                        v-if="!showNavBar"
                         @click.stop="showNavBar = !showNavBar"
                 ></v-toolbar-side-icon>
                 <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -68,8 +65,8 @@
                     </v-tab-item>
 
                     <v-tab-item>
-                        <v-container grid-list-md>
-                            <v-layout row wrap align-center>
+                        <v-container fluid>
+                            <v-layout row wrap>
                                 <v-flex xs12>
                                     <jupyter-widget-mount-point mount-id="vbtn1"></jupyter-widget-mount-point>
                                 </v-flex>
@@ -87,9 +84,9 @@
                     </v-tab-item>
 
                     <v-tab-item>
-                        <v-layout row wrap align-center>
+                        <v-container fluid>
                             Lorum ipsum
-                        </v-layout>
+                        </v-container>
                     </v-tab-item>
                 </v-tabs>
             </v-content>
@@ -103,34 +100,18 @@ var app = new Vue({
     el: '#app',
     mounted() {
         document.querySelector('#app').removeAttribute("style");
-        if(localStorage.autoHideNavBar) {
-            this.autoHideNavBar = JSON.parse(localStorage.autoHideNavBar);
-            this.showNavBar = !this.autoHideNavBar
-        }
-    },
-    beforeUpdate() {
-      console.log("beforeUpdate");
-    },
-    updated() {
-        console.log("Updated");
-    },
-    watch: {
-        autoHideNavBar(value) {
-            localStorage.autoHideNavBar = value
-        },
     },
     data() {
         return {
-            showSettings: true,
-            showNavBar: false,
-            autoHideNavBar: true,
+            showNavBar: null,
             loading: true,
             right: null,
             url: 'https://www.w3schools.com/',
             items: [
-                {icon: "fingerprint", title: "hoi", url: "nu.nl", current: true}
+                {icon: "dashboard", title: "Voila", url: "https://github.com/QuantStack/voila", current: true},
+                {icon: "touch_app", title: "Voila-vuetify", url: "https://github.com/mariobuikhuizen/voila-vuetify", current: true}
             ],
-            title: 'hoi',
+            title: 'Voila vuetify',
         }
     }
 });
