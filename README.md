@@ -3,5 +3,5 @@
 ## Usage
 ```
 pip install -e .
-voila --template custom mountable2.ipynb
+voila --template vuetify-default bqplot_vuetify_example.ipynb
 ```
