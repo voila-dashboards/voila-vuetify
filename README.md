@@ -2,6 +2,8 @@
 
 ## Usage
 ```
+pip install bqplot
+pip install ipyvuetify
 pip install voila-vuetify
 voila --template vuetify-default bqplot_vuetify_example.ipynb
 ```
