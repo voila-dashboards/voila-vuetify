@@ -86,13 +86,13 @@ for (dirpath, dirnames, filenames) in os.walk('share/jupyter/voila/templates/'):
 
 setup(
     name='voila-vuetify',
-    version="0.0.1",
+    version="0.0.1a3",
     description="A vuetify template for voila",
     data_files=data_files,
     include_package_data=True,
     author='Mario Buikhuizen, Maarten Breddels',
     author_email='mbuikhuizen@gmail.com, maartenbreddels@gmail.com',
-    url='https://github.com/mariobuikhuizen/voila-vuetify',
+    url='https://github.com/QuantStack/voila-vuetify',
     keywords=[
         'ipython',
         'jupyter',
