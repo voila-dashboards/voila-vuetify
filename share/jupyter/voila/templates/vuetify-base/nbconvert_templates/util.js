@@ -68,6 +68,16 @@ window.init = async (voila) => {
     window.addEventListener('beforeunload', () => kernel.shutdown());
 
     const widgetManager = new voila.WidgetManager(kernel);
+
+    const originalLoader = widgetManager.loader;
+    widgetManager.loader = (moduleName, moduleVersion) => {
+        console.log(moduleName, moduleVersion);
+        if (moduleName === 'jupyter-vuetify') {
+            moduleName = moduleName + '/nodeps'
+        }
+        return originalLoader(moduleName, moduleVersion);
+    };
+
     await widgetManager.build_widgets();
 
     Object.values(widgetManager._models)

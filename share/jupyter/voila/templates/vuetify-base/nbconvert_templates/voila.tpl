@@ -28,18 +28,8 @@
         requirejs.config({
             baseUrl: '{{resources.base_url}}voila',
             waitSeconds: 3000,
-            map: {
-                '*': {
-                     'jupyter-vuetify': 'nbextensions/jupyter-vuetify/nodeps',
-                },
-            },
         });
         requirejs(['static/voila'], (voila) => init(voila));
-        requirejs([
-            {% for ext in resources.nbextensions if ext != 'jupyter-vuetify/extension' -%}
-                "{{resources.base_url}}voila/nbextensions/{{ ext }}.js",
-            {% endfor %}
-        ]);
     </script>
 </html>
 
