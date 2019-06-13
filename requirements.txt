@@ -1,0 +1,5 @@
+voila
+ipyvuetify
+voila-vuetify
+bqplot
+numpy
