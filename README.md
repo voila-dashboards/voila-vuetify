@@ -2,7 +2,7 @@
 
 ## Usage
 ```
-pip install -e .
+pip install voila-vuetify
 voila --template vuetify-default --enable_nbextensions=True bqplot_vuetify_example.ipynb
 ```
 
