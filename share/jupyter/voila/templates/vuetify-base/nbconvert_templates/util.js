@@ -71,7 +71,6 @@ window.init = async (voila) => {
 
     const originalLoader = widgetManager.loader;
     widgetManager.loader = (moduleName, moduleVersion) => {
-        console.log(moduleName, moduleVersion);
         if (moduleName === 'jupyter-vuetify') {
             moduleName = moduleName + '/nodeps'
         }
