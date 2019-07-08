@@ -20,17 +20,19 @@
 
 <script>
 
-var app = new Vue({
-    el: '#app',
-    mounted() {
-        document.querySelector('#app').removeAttribute("style");
-    },
-    data() {
-        return {
-            loading: true
-        }
-    }
-});
+    define('app', ['vue'], function({ Vue }) {
+        return new Vue({
+            el: '#app',
+            mounted() {
+                document.querySelector('#app').removeAttribute("style");
+            },
+            data() {
+                return {
+                    loading: true
+                }
+            }
+        });
+    });
 
 </script>
 {% endraw -%}

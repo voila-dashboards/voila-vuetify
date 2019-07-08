@@ -62,29 +62,31 @@
 
 <script>
 
-var app = new Vue({
-    el: '#app',
-    mounted() {
-        document.querySelector('#app').removeAttribute("style");
-    },
-    data() {
-        return {
-            showNavBar: null,
-            loading: true,
-            right: null,
-            url: 'https://www.w3schools.com/',
-            items: [
-                {icon: "dashboard", title: "voila", url: "https://github.com/QuantStack/voila"},
-                {icon: "touch_app", title: "voila-vuetify", url: "https://github.com/mariobuikhuizen/voila-vuetify"},
-                {icon: "web", title: "ipvuetify", url: "https://github.com/mariobuikhuizen/ipyvuetify"},
-                {icon: "web", title: "vuetify", url: "https://vuetifyjs.com/"},
-                {icon: "widgets", title: "jupyter widgets", url: "https://github.com/jupyter-widgets/ipywidgets"},
-                {icon: "bar_chart", title: "bqplot", url: "https://github.com/bloomberg/bqplot/"},
-            ],
-            title: 'Voila vuetify',
-        }
-    }
-});
+    define('app', ['vue'], function({ Vue }) {
+        return new Vue({
+            el: '#app',
+            mounted() {
+                document.querySelector('#app').removeAttribute("style");
+            },
+            data() {
+                return {
+                    showNavBar: null,
+                    loading: true,
+                    right: null,
+                    url: 'https://www.w3schools.com/',
+                    items: [
+                        {icon: "dashboard", title: "voila", url: "https://github.com/QuantStack/voila"},
+                        {icon: "touch_app", title: "voila-vuetify", url: "https://github.com/mariobuikhuizen/voila-vuetify"},
+                        {icon: "web", title: "ipvuetify", url: "https://github.com/mariobuikhuizen/ipyvuetify"},
+                        {icon: "web", title: "vuetify", url: "https://vuetifyjs.com/"},
+                        {icon: "widgets", title: "jupyter widgets", url: "https://github.com/jupyter-widgets/ipywidgets"},
+                        {icon: "bar_chart", title: "bqplot", url: "https://github.com/bloomberg/bqplot/"},
+                    ],
+                    title: 'Voila vuetify',
+                }
+            }
+        });
+    });
 
 </script>
 {% endraw -%}
