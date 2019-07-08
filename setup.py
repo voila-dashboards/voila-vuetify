@@ -49,9 +49,10 @@ def user_dir():
 
 class DevelopCmd(develop):
     prefix_targets = [
+        ("nbconvert/templates", 'vuetify-base'),
+        ("nbconvert/templates", 'vuetify-default'),
         ("voila/templates", 'vuetify-base'),
         ("voila/templates", 'vuetify-default'),
-        ("voila/templates", 'custom')
     ]
     def run(self):
         target_dir = os.path.join(sys.prefix, 'share', 'jupyter')
@@ -79,17 +80,17 @@ class DevelopCmd(develop):
 # WARNING: all files generates during setup.py will not end up in the source distribution
 data_files = []
 # Add all the templates
-for (dirpath, dirnames, filenames) in os.walk('share/jupyter/voila/templates/'):
+for (dirpath, dirnames, filenames) in os.walk('share/jupyter/'):
     if filenames:
         data_files.append((dirpath, [os.path.join(dirpath, filename) for filename in filenames]))
 
 
 setup(
     name='voila-vuetify',
-    version="0.4.0",
+    version="0.5.0",
     description="A vuetify template for Voila",
     data_files=data_files,
-    install_requires=['voila>=0.1.11,<0.2'],
+    install_requires=['voila>=0.2.0b1,<0.3'],
     include_package_data=True,
     author='Mario Buikhuizen, Maarten Breddels',
     author_email='mbuikhuizen@gmail.com, maartenbreddels@gmail.com',
