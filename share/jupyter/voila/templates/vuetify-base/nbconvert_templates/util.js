@@ -61,13 +61,50 @@ function requestWidget(mountId) {
     return widgetPromises[mountId];
 }
 
+function getWidgetManager(voila, kernel) {
+    try {
+        /* voila < 0.1.8 */
+        return new voila.WidgetManager(kernel);
+    } catch (e) {
+        if (e instanceof TypeError) {
+            /* voila >= 0.1.8 */
+            const context = {
+                session: {
+                    kernel,
+                    kernelChanged: {
+                        connect: () => {}
+                    },
+                    statusChanged: {
+                        connect: () => {}
+                    },
+                },
+                saveState: {
+                    connect: () => {}
+                },
+            };
+
+            const settings = {
+                saveState: false
+            };
+
+            const rendermime = new voila.RenderMimeRegistry({
+                initialFactories: voila.standardRendererFactories
+            });
+
+            return new voila.WidgetManager(context, rendermime, settings);
+        } else {
+            throw e;
+        }
+    }
+}
+
 window.init = async (voila) => {
    define("vue", {"Vue": Vue});
 
     const kernel = await voila.connectKernel();
     window.addEventListener('beforeunload', () => kernel.shutdown());
 
-    const widgetManager = new voila.WidgetManager(kernel);
+    const widgetManager = getWidgetManager(voila, kernel);
 
     const originalLoader = widgetManager.loader;
     widgetManager.loader = (moduleName, moduleVersion) => {
