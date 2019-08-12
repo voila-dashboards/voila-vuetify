@@ -106,13 +106,26 @@ window.init = async (voila) => {
 
     const widgetManager = getWidgetManager(voila, kernel);
 
-    const originalLoader = widgetManager.loader;
-    widgetManager.loader = (moduleName, moduleVersion) => {
-        if (moduleName === 'jupyter-vuetify') {
-            moduleName = moduleName + '/nodeps'
-        }
-        return originalLoader(moduleName, moduleVersion);
-    };
+    if (!window.enable_nbextensions) {
+        const originalLoader = widgetManager.loader;
+        widgetManager.loader = (moduleName, moduleVersion) => {
+            if (moduleName === 'jupyter-vuetify' || moduleName === 'jupyter-vue') {
+                const newModuleName = moduleName + '/nodeps';
+                const promise = originalLoader(newModuleName, moduleVersion);
+                if (moduleName === 'jupyter-vue') {
+                    promise.then(_ => requirejs.config({
+                        map: {
+                            '*': {
+                                [moduleName]: newModuleName
+                            }
+                        }
+                    }));
+                }
+                return promise;
+            }
+            return originalLoader(moduleName, moduleVersion);
+        };
+    }
 
     await widgetManager.build_widgets();
 

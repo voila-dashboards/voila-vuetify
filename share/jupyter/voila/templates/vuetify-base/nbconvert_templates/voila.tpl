@@ -26,19 +26,25 @@
     </script>
 
     <script>
+        {% if 'jupyter-vuetify/extension' in resources.nbextensions-%}
+        window.enable_nbextensions = true;
+        {% endif-%}
         requirejs.config({
             baseUrl: '{{resources.base_url}}voila',
             waitSeconds: 3000,
-            {% for ext in resources.nbextensions if ext == 'jupyter-vuetify/extension'-%}
             map: {
                 '*': {
-                    'jupyter-vuetify': 'nbextensions/jupyter-vuetify'
+                    {% if 'jupyter-vue/extension' in resources.nbextensions-%}
+                    'jupyter-vue': 'nbextensions/jupyter-vue/nodeps',
+                    {% endif-%}
+                    {% if 'jupyter-vuetify/extension' in resources.nbextensions-%}
+                    'jupyter-vuetify': 'nbextensions/jupyter-vuetify/nodeps',
+                    {% endif-%}
                 },
             }
-            {% endfor %}
         });
         requirejs([
-            {% for ext in resources.nbextensions if ext != 'jupyter-vuetify/extension'-%}
+            {% for ext in resources.nbextensions if ext != 'jupyter-vuetify/extension' and ext != 'jupyter-vue/extension'-%}
                 "{{resources.base_url}}voila/nbextensions/{{ ext }}.js",
             {% endfor %}
         ]);
