@@ -27,7 +27,7 @@
     {% set cell_count = nb.cells|length %}
     <script>
     var voila_process = function(cell_index, cell_count) {
-        const loading_text = `Executing ${cell_index} of ${cell_count}`
+        const loading_text = `Executing cell ${cell_index} of ${cell_count}`
         console.log(loading_text)
         app.loading_text = loading_text
         app.loadingPercentage = cell_index / cell_count * 100
