@@ -6,7 +6,7 @@
                 <v-progress-linear indeterminate></v-progress-linear>
 
                 <v-card-title primary-title>
-                    <h1>Loading</h1>
+                    <h1>{{ loading_text }}</h1>
                 </v-card-title>
             </v-card>
         </v-layout>
@@ -74,6 +74,7 @@ var app = new Vue({
     },
     data() {
         return {
+            loading_text: "Loading page",
             showNavBar: null,
             loading: true,
             right: null,
