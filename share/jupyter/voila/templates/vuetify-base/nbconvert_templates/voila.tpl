@@ -32,12 +32,10 @@
         app.loading_text = loading_text
     }
 
-    voila_process(0, {{ cell_count }});
-
     </script>
     {% for cell in cell_generator(nb, kernel_id) %}
         <script>
-            voila_process({{ loop.index +1 }}, {{ cell_count }});
+            voila_process({{ loop.index }}, {{ cell_count }});
         </script>
     {% endfor %}
 
