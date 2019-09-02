@@ -3,7 +3,10 @@
     <v-app>
         <v-layout v-if="loading" align-center justify-center>
             <v-card class="pa-2">
-                <v-progress-linear indeterminate></v-progress-linear>
+                <v-progress-linear
+                        :indeterminate="loadingPercentage < 0"
+                        v-model="loadingPercentage"
+                ></v-progress-linear>
 
                 <v-card-title primary-title>
                     <h1>{{ loading_text }}</h1>
@@ -75,6 +78,7 @@ var app = new Vue({
     data() {
         return {
             loading_text: "Loading page",
+            loadingPercentage: -1,
             showNavBar: null,
             loading: true,
             right: null,
