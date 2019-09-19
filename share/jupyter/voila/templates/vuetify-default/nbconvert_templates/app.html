@@ -28,26 +28,26 @@
                         Placeholder for widget with mount id <i>content-nav</i>.
                     </v-container>
                     <v-list dense class="pt-0">
-                        <v-list-tile v-for="item in items" :key="item.title" :href="item.url"
+                        <v-list-item v-for="item in items" :key="item.title" :href="item.url"
                                      target="_blank">
-                            <v-list-tile-action>
+                            <v-list-item-action>
                                 <v-icon>{{ item.icon }}</v-icon>
-                            </v-list-tile-action>
+                            </v-list-item-action>
 
-                            <v-list-tile-content>
-                                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
+                            <v-list-item-content>
+                                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
                     </v-list>
                 </jupyter-widget-mount-point>
             </v-navigation-drawer>
-            <v-toolbar app absolute>
+            <v-app-bar app absolute>
                 <v-toolbar-side-icon
                         v-if="!showNavBar"
                         @click.stop="showNavBar = !showNavBar"
                 ></v-toolbar-side-icon>
                 <v-toolbar-title>{{ title }}</v-toolbar-title>
-            </v-toolbar>
+            </v-app-bar>
 
             <v-content>
                 <jupyter-widget-mount-point mount-id="content-main">
@@ -63,6 +63,11 @@
 <script>
 
 var app = new Vue({
+    vuetify: new Vuetify({
+        icons: {
+            iconfont: 'md',
+        },
+    }),
     el: '#app',
     mounted() {
         document.querySelector('#app').removeAttribute("style");

@@ -1,6 +1,4 @@
-Vue.use(Vuetify, {
-    iconfont: 'md',
-});
+Vue.use(Vuetify);
 
 Vue.component('jupyter-widget-mount-point', {
     data() {
@@ -99,7 +97,7 @@ function getWidgetManager(voila, kernel) {
 }
 
 window.init = async (voila) => {
-   define("vue", {"Vue": Vue});
+    define("vue", [], () => Vue);
 
     const kernel = await voila.connectKernel();
     window.addEventListener('beforeunload', () => kernel.shutdown());
