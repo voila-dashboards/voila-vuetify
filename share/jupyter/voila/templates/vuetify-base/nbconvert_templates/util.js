@@ -1,6 +1,4 @@
-Vue.use(Vuetify, {
-    iconfont: 'md',
-});
+Vue.use(Vuetify);
 
 Vue.component('jupyter-widget-mount-point', {
     data() {
