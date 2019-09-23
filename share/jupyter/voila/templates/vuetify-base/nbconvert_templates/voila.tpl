@@ -17,13 +17,28 @@
 
         {% include "app.html" %}
     </body>
-
+{%- set kernel_id = kernel_start() -%}
     <script id="jupyter-config-data" type="application/json">
         {
           "baseUrl": "{{resources.base_url}}",
-          "kernelId": "{{resources.kernel_id}}"
+          "kernelId": "{{kernel_id}}"
         }
     </script>
+    {% set cell_count = nb.cells|length %}
+    <script>
+    var voila_process = function(cell_index, cell_count) {
+        const loading_text = `Executing cell ${cell_index} of ${cell_count}`
+        console.log(loading_text)
+        app.loading_text = loading_text
+        app.loadingPercentage = cell_index / cell_count * 100
+    }
+
+    </script>
+    {% for cell in cell_generator(nb, kernel_id) %}
+        <script>
+            voila_process({{ loop.index }}, {{ cell_count }});
+        </script>
+    {% endfor %}
 
     <script>
         {% if 'jupyter-vuetify/extension' in resources.nbextensions-%}

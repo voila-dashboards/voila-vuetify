@@ -1,62 +1,70 @@
 {% raw -%}
 <div id="app" style="display: none">
     <v-app>
-        <v-layout v-if="loading" align-center justify-center>
-            <v-card class="pa-2">
-                <v-progress-linear indeterminate></v-progress-linear>
+        <v-slide-y-transition>
+            <v-layout v-show="loading" align-center justify-center>
+                <v-card style="min-width: 600px">
+                    <v-progress-linear
+                            :indeterminate="loadingPercentage < 0"
+                            v-model="loadingPercentage"
+                            height="15"
+                    ></v-progress-linear>
 
-                <v-card-title primary-title>
-                    <h1>Loading</h1>
-                </v-card-title>
-            </v-card>
-        </v-layout>
-        <v-layout v-else>
-            <v-navigation-drawer v-model="showNavBar" absolute app>
-                <v-toolbar flat>
-                    <v-list>
-                        <v-list-tile>
-                            <v-list-tile-title class="title">
-                                Navigation
-                            </v-list-tile-title>
-                        </v-list-tile>
-                    </v-list>
-                </v-toolbar>
+                    <v-card-title primary-title class="py-8">
+                        <h1>{{ loading_text }}</h1>
+                    </v-card-title>
+                </v-card>
+            </v-layout>
+        </v-slide-y-transition>
+        <v-slide-y-transition>
+            <v-layout v-show="!loading">
+                <v-navigation-drawer v-model="showNavBar" absolute app>
+                    <v-toolbar flat>
+                        <v-list>
+                            <v-list-item>
+                                <v-list-item-title class="title">
+                                    Navigation
+                                </v-list-item-title>
+                            </v-list-item>
+                        </v-list>
+                    </v-toolbar>
 
-                <v-divider></v-divider>
-                <jupyter-widget-mount-point mount-id="content-nav">
-                    <v-container>
-                        Placeholder for widget with mount id <i>content-nav</i>.
-                    </v-container>
-                    <v-list dense class="pt-0">
-                        <v-list-item v-for="item in items" :key="item.title" :href="item.url"
-                                     target="_blank">
-                            <v-list-item-action>
-                                <v-icon>{{ item.icon }}</v-icon>
-                            </v-list-item-action>
-
-                            <v-list-item-content>
-                                <v-list-item-title>{{ item.title }}</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </jupyter-widget-mount-point>
-            </v-navigation-drawer>
-            <v-app-bar app absolute>
-                <v-toolbar-side-icon
-                        v-if="!showNavBar"
-                        @click.stop="showNavBar = !showNavBar"
-                ></v-toolbar-side-icon>
-                <v-toolbar-title>{{ title }}</v-toolbar-title>
-            </v-app-bar>
-
-            <v-content>
-                <jupyter-widget-mount-point mount-id="content-main">
+                    <v-divider></v-divider>
+                    <jupyter-widget-mount-point mount-id="content-nav">
                         <v-container>
-                                Placeholder for widget with mount id <i>content-main</i>.
+                            Placeholder for widget with mount id <i>content-nav</i>.
                         </v-container>
-                </jupyter-widget-mount-point>
-            </v-content>
-        </v-layout>
+                        <v-list dense class="pt-0">
+                            <v-list-item v-for="item in items" :key="item.title" :href="item.url"
+                                         target="_blank">
+                                <v-list-item-action>
+                                    <v-icon>{{ item.icon }}</v-icon>
+                                </v-list-item-action>
+
+                                <v-list-item-content>
+                                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                    </jupyter-widget-mount-point>
+                </v-navigation-drawer>
+                <v-app-bar app absolute>
+                    <v-toolbar-side-icon
+                            v-if="!showNavBar"
+                            @click.stop="showNavBar = !showNavBar"
+                    ></v-toolbar-side-icon>
+                    <v-toolbar-title>{{ title }}</v-toolbar-title>
+                </v-app-bar>
+
+                <v-content>
+                    <jupyter-widget-mount-point mount-id="content-main">
+                            <v-container>
+                                    Placeholder for widget with mount id <i>content-main</i>.
+                            </v-container>
+                    </jupyter-widget-mount-point>
+                </v-content>
+            </v-layout>
+        </v-slide-y-transition>
     </v-app>
 </div>
 
@@ -74,6 +82,8 @@ var app = new Vue({
     },
     data() {
         return {
+            loading_text: "Loading page",
+            loadingPercentage: -1,
             showNavBar: null,
             loading: true,
             right: null,
