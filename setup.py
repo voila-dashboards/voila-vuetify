@@ -89,6 +89,7 @@ setup(
     version="0.0.1a8",
     description="A vuetify template for voila",
     data_files=data_files,
+    install_requires=['voila>=0.1.11,<0.2'],
     include_package_data=True,
     author='Mario Buikhuizen, Maarten Breddels',
     author_email='mbuikhuizen@gmail.com, maartenbreddels@gmail.com',
