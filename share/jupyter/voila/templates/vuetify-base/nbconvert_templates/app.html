@@ -1,20 +1,28 @@
 {% raw -%}
 <div id="app" style="display: none">
     <v-app >
-        <v-layout v-if="loading" align-center justify-center>
-            <v-card class="pa-2">
-                <v-progress-linear indeterminate></v-progress-linear>
+        <v-slide-y-transition>
+            <v-layout v-show="loading" align-center justify-center>
+                <v-card style="min-width: 600px">
+                    <v-progress-linear
+                            :indeterminate="loadingPercentage < 0"
+                            v-model="loadingPercentage"
+                            height="15"
+                    ></v-progress-linear>
 
-                <v-card-title primary-title>
-                    <h1>Loading</h1>
-                </v-card-title>
-            </v-card>
-        </v-layout>
-        <v-layout v-else>
-                <jupyter-widget-mount-point mount-id="content">
-                    A widget with mount-id="content" should go here
-                </jupyter-widget-mount-point>
-        </v-layout>
+                    <v-card-title primary-title class="py-8">
+                        <h1>{{ loading_text }}</h1>
+                    </v-card-title>
+                </v-card>
+            </v-layout>
+        </v-slide-y-transition>
+        <v-slide-y-transition>
+            <v-layout v-show="!loading">
+                    <jupyter-widget-mount-point mount-id="content">
+                        A widget with mount-id="content" should go here
+                    </jupyter-widget-mount-point>
+            </v-layout>
+        </v-slide-y-transition>
     </v-app>
 </div>
 
@@ -32,6 +40,8 @@ var app = new Vue({
     },
     data() {
         return {
+            loading_text: "Loading page",
+            loadingPercentage: -1,
             loading: true
         }
     }
