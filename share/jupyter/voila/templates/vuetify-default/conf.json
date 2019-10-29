@@ -1,1 +1,5 @@
-{"base_template": "vuetify-base"}
+{
+  "traitlet_configuration": {
+    "base_template": "vuetify-default"
+  }
+}
