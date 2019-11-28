@@ -7,5 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.7' # Version range or exact version of a Python version to use, using semvers version range syntax.
+      - name: build
+        run: python setup.py sdist
       - name: Release
-        run: ls -ahl
+        run: find .
