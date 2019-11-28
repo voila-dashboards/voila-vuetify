@@ -1,0 +1,10 @@
+name: Release
+on: [push]
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release
+        run: ls -ahl
