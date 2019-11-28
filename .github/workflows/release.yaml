@@ -15,7 +15,7 @@ jobs:
       - name: List content
         run: tar -tvzf dist/`ls dist`
       - name: Publish package to TestPyPI
-          uses: pypa/gh-action-pypi-publish@ae9c4b332a55c3ae8ba9d47fda1702d4cc7768b2
+        uses: pypa/gh-action-pypi-publish@ae9c4b332a55c3ae8ba9d47fda1702d4cc7768b2
           with:
             user: __token__
             password: ${{ secrets.test_pypi_password }}
