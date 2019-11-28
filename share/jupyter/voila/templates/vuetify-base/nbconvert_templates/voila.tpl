@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.0.17/vuetify.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.0.17/vuetify.min.css" rel="stylesheet">
