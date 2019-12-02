@@ -1,6 +1,8 @@
 # voila-vuetify
 
 [![Join the Gitter Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/QuantStack/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Version](https://img.shields.io/pypi/v/voila-vuetify.svg)](https://pypi.python.org/mariobuikhuizen/voila-vuetify)
+[![Conda Version](https://img.shields.io/conda/vn/conda-forge/voila-vuetify.svg)](https://anaconda.org/conda-forge/voila-vuetify)
 
 ## Installation
 
