@@ -49,10 +49,10 @@
                     </jupyter-widget-mount-point>
                 </v-navigation-drawer>
                 <v-app-bar app absolute>
-                    <v-toolbar-side-icon
-                            v-if="!showNavBar"
-                            @click.stop="showNavBar = !showNavBar"
-                    ></v-toolbar-side-icon>
+                    <v-app-bar-nav-icon
+                        v-if="!showNavBar"
+                        @click.stop="showNavBar = !showNavBar">
+                    </v-app-bar-nav-icon>
                     <v-toolbar-title>{{ title }}</v-toolbar-title>
                 </v-app-bar>
 
