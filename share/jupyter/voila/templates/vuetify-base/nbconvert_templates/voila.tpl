@@ -10,6 +10,9 @@
         <link href='{{resources.base_url}}voila/static/theme-light.css' rel="stylesheet">
         <script src="{{resources.base_url}}voila/static/require.min.js" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+        {% set nb_title = nb.metadata.get('title', '') or resources['metadata']['name'] %}
+		<title>Voila: {{nb_title}}</title>
     </head>
 
     <body data-base-url="{{resources.base_url}}voila/">
@@ -19,7 +22,7 @@
 
         {% include "app.html" %}
     </body>
-{%- set kernel_id = kernel_start() -%}
+	{%- set kernel_id = kernel_start() -%}
     <script id="jupyter-config-data" type="application/json">
         {
           "baseUrl": "{{resources.base_url}}",
@@ -27,14 +30,16 @@
         }
     </script>
     {% set cell_count = nb.cells|length %}
+    
     <script>
-    var voila_process = function(cell_index, cell_count) {
-        const loading_text = `Executing cell ${cell_index} of ${cell_count}`
-        console.log(loading_text)
-        app.loading_text = loading_text
-        app.loadingPercentage = cell_index / cell_count * 100
-    }
-
+	   	app.title = "{{nb_title}}"
+	    
+	    var voila_process = function(cell_index, cell_count) {
+	        const loading_text = `Executing cell ${cell_index} of ${cell_count}`
+	        console.log(loading_text)
+	        app.loading_text = loading_text
+	        app.loadingPercentage = cell_index / cell_count * 100
+	    }
     </script>
     {% for cell in cell_generator(nb, kernel_id) %}
         <script>
