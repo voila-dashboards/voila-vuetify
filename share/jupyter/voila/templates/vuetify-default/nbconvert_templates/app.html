@@ -18,7 +18,7 @@
         </v-slide-y-transition>
         <v-slide-y-transition>
             <v-layout v-show="!loading">
-                <v-navigation-drawer v-model="showNavBar" absolute app>
+                <v-navigation-drawer v-model="showNavBar" app>
                     <v-toolbar flat>
                         <v-list>
                             <v-list-item>
@@ -48,7 +48,7 @@
                         </v-list>
                     </jupyter-widget-mount-point>
                 </v-navigation-drawer>
-                <v-app-bar app absolute>
+                <v-app-bar app>
                     <v-app-bar-nav-icon
                         v-if="!showNavBar"
                         @click.stop="showNavBar = !showNavBar">
