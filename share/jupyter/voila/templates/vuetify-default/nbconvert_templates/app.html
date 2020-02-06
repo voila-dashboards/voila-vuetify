@@ -23,7 +23,9 @@
                         <v-list>
                             <v-list-item>
                                 <v-list-item-title class="title">
-                                    Navigation
+                                    <jupyter-widget-mount-point mount-id="content-title">
+                                        Navigation
+                                    </jupyter-widget-mount-point>
                                 </v-list-item-title>
                             </v-list-item>
                         </v-list>
@@ -53,7 +55,9 @@
                         v-if="!showNavBar"
                         @click.stop="showNavBar = !showNavBar">
                     </v-app-bar-nav-icon>
-                    <v-toolbar-title>{{ title }}</v-toolbar-title>
+                    <jupyter-widget-mount-point mount-id="content-bar">
+                        <v-toolbar-title>{{ title }}</v-toolbar-title>
+                    </jupyter-widget-mount-point>
                 </v-app-bar>
 
                 <v-content>
