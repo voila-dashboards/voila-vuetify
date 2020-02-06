@@ -12,6 +12,12 @@
 pip install voila-vuetify
 ```
 
+or from conda:
+
+```
+conda install -c conda-forge voila-vuetify
+```
+
 ## Usage
 
 To use the `vuetify` template, just pass `--template=vuetify-default` to the `voila` command line.
@@ -19,9 +25,7 @@ To use the `vuetify` template, just pass `--template=vuetify-default` to the `vo
 The example notebook also requires bqplot and ipyvuetify:
 
 ```
-pip install bqplot
-pip install ipyvuetify
-pip install voila-vuetify
+pip install bqplot ipyvuetify voila-vuetify
 voila --template vuetify-default bqplot_vuetify_example.ipynb
 ```
 
