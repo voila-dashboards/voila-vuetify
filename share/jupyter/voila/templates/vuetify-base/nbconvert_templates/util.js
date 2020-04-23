@@ -98,6 +98,7 @@ function getWidgetManager(voila, kernel) {
 
 window.init = async (voila) => {
     define("vue", [], () => Vue);
+    define("vuetify", [], { framework: app.$vuetify });
 
     const kernel = await voila.connectKernel();
     window.addEventListener('beforeunload', () => kernel.shutdown());
