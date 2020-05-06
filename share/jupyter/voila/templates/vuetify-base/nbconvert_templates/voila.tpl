@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.0.17/vuetify.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.0.17/vuetify.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.26/dist/vuetify.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.26/dist/vuetify.min.css" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
         <link href='https://cdn.materialdesignicons.com/4.4.95/css/materialdesignicons.min.css' rel="stylesheet">
         <link href='{{resources.base_url}}voila/static/index.css' rel="stylesheet">
