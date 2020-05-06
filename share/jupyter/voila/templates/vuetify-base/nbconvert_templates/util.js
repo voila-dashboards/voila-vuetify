@@ -119,11 +119,27 @@ window.init = async (voila) => {
         };
     }
 
+
+    /* Workaround: prevent the theme from being overwritten by ipyvuetify initialization */
+    if (themeIsdark !== undefined) {
+        const original = app.$vuetify;
+        app.$vuetify = {
+            theme: {
+                dark: false,
+                themes: original.theme.themes
+            }
+        };
+    }
+
     await widgetManager.build_widgets();
 
     Object.values(widgetManager._models)
         .forEach(async (modelPromise) => {
             const model = await modelPromise;
+            if (model.name === 'ThemeModel' && themeIsdark !== undefined) {
+                model.set('dark', themeIsdark);
+                app.$vuetify = original;
+            }
             const meta = model.get('_metadata');
             const mountId = meta && meta.mount_id;
             if (mountId && model.get('_view_name')) {

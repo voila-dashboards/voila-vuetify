@@ -73,9 +73,19 @@
 </div>
 
 <script>
+var themeIsdark;
+if (window.location.search) {
+    if (window.location.search.includes('theme=dark')) {
+        themeIsdark = true;
+    } else if (window.location.search.includes('theme=light')) {
+        themeIsdark = false;
+    }
+}
 
 var app = new Vue({
-    vuetify: new Vuetify(),
+    vuetify: new Vuetify({
+        theme: { dark: themeIsdark },
+    }),
     el: '#app',
     mounted() {
         document.querySelector('#app').removeAttribute("style");
