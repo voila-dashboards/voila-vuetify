@@ -3,11 +3,13 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.0.17/vuetify.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.0.17/vuetify.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.26/dist/vuetify.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.26/dist/vuetify.min.css" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+        <link href='https://cdn.materialdesignicons.com/4.4.95/css/materialdesignicons.min.css' rel="stylesheet">
         <link href='{{resources.base_url}}voila/static/index.css' rel="stylesheet">
         <link href='{{resources.base_url}}voila/static/theme-light.css' rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.5.0/css/font-awesome.min.css" type="text/css">
         <script src="{{resources.base_url}}voila/static/require.min.js" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
