@@ -97,6 +97,9 @@ function getWidgetManager(voila, kernel) {
 }
 
 var themeIsdark;
+if ('{{resources.theme}}' === 'dark') {
+    themeIsdark = true;
+}
 if (window.location.search) {
     if (window.location.search.includes('theme=dark')) {
         themeIsdark = true;
