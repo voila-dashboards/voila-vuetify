@@ -96,6 +96,15 @@ function getWidgetManager(voila, kernel) {
     }
 }
 
+var themeIsdark;
+if (window.location.search) {
+    if (window.location.search.includes('theme=dark')) {
+        themeIsdark = true;
+    } else if (window.location.search.includes('theme=light')) {
+        themeIsdark = false;
+    }
+}
+
 window.init = async (voila) => {
     define("vue", [], () => Vue);
     define("vuetify", [], { framework: app.$vuetify });
@@ -121,8 +130,9 @@ window.init = async (voila) => {
 
 
     /* Workaround: prevent the theme from being overwritten by ipyvuetify initialization */
+    let original;
     if (themeIsdark !== undefined) {
-        const original = app.$vuetify;
+        original = app.$vuetify;
         app.$vuetify = {
             theme: {
                 dark: false,
