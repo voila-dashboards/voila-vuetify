@@ -144,6 +144,9 @@ window.init = async (voila) => {
         };
     }
 
+    app.$data.loadingPercentage = -1;
+    app.$data.loading_text = 'Loading widgets';
+
     await widgetManager.build_widgets();
 
     Object.values(widgetManager._models)
@@ -161,6 +164,8 @@ window.init = async (voila) => {
             }
         });
 
+    app.$data.loadingPercentage = 0;
+    app.$data.loading_text = 'Done';
     app.$data.loading = false;
     removeInterferingStyleTags();
 };
