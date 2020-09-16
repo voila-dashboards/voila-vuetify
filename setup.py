@@ -87,7 +87,7 @@ for (dirpath, dirnames, filenames) in os.walk('share/jupyter/'):
 
 setup(
     name='voila-vuetify',
-    version="0.5.0",
+    version="0.5.1",
     description="A vuetify template for Voila",
     data_files=data_files,
     install_requires=['voila>=0.2.0b1,<0.3'],
