@@ -149,8 +149,8 @@ window.init = async (voila) => {
 
     await widgetManager.build_widgets();
 
-    Object.values(widgetManager._models)
-        .forEach(async (modelPromise) => {
+    await Promise.all(Object.values(widgetManager._models)
+        .map(async (modelPromise) => {
             const model = await modelPromise;
             if (model.name === 'ThemeModel' && themeIsdark !== undefined) {
                 model.set('dark', themeIsdark);
@@ -162,12 +162,14 @@ window.init = async (voila) => {
                 const view = await widgetManager.create_view(model);
                 provideWidget(mountId, view);
             }
-        });
+        }));
 
     app.$data.loadingPercentage = 0;
     app.$data.loading_text = 'Done';
     app.$data.loading = false;
     removeInterferingStyleTags();
+
+    setTimeout(voila.renderMathJax);
 };
 
 function removeInterferingStyleTags() {
