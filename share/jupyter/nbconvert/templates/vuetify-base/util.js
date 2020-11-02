@@ -96,6 +96,25 @@ function getWidgetManager(voila, kernel) {
     }
 }
 
+function injectDebugMessageInterceptor(kernel) {
+    const _original_handle_message = kernel._handleMessage.bind(kernel)
+    kernel._handleMessage = ((msg) => {
+        if (msg.msg_type === 'error') {
+            app.$data.voilaDebugMessages.push({
+                cell: '_',
+                traceback: msg.content.traceback.map(line => ansiSpan(_.escape(line)))
+            });
+        } else if(msg.msg_type === 'stream' && (msg.content['name'] === 'stdout' || msg.content['name'] === 'stderr')) {
+            app.$data.voilaDebugMessages.push({
+                cell: '_',
+                name: msg.content.name,
+                text: msg.content.text
+            });
+        }
+        return _original_handle_message(msg);
+    })
+}
+
 var themeIsdark;
 if ('{{resources.theme}}' === 'dark') {
     themeIsdark = true;
@@ -113,6 +132,7 @@ window.init = async (voila) => {
     define("vuetify", [], { framework: app.$vuetify });
 
     const kernel = await voila.connectKernel();
+    injectDebugMessageInterceptor(kernel);
     window.addEventListener('beforeunload', () => kernel.shutdown());
 
     const widgetManager = getWidgetManager(voila, kernel);
@@ -169,6 +189,11 @@ window.init = async (voila) => {
     app.$data.loading = false;
     removeInterferingStyleTags();
 
+    const urlParams = new URLSearchParams(window.location.search);
+    app.$data.debug = urlParams.has('debug')
+    if (window['voilaDebugMessages']) {
+        app.$data.voilaDebugMessages = window['voilaDebugMessages'];
+    }
     setTimeout(voila.renderMathJax);
 };
 

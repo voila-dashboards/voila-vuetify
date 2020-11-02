@@ -31,6 +31,17 @@ voila --template vuetify-default bqplot_vuetify_example.ipynb
 
 ![voila-vuetify](https://user-images.githubusercontent.com/46192475/59274938-9c144f00-8c5b-11e9-961e-c33854b6e50a.gif)
 
+## Debug
+
+To see errors and stdout/stderr messages, start voila with `--debug` and add `?debug` to the voila URL:
+```
+voila --debug  --template vuetify-default bqplot_vuetify_example.ipynb
+
+http://localhost:8866?debug
+```
+
+A bug icon will appear in the bottom right-hand corner when an error occurs or if there is output on stdout or stderr.
+
 ## License
 
 We use a shared copyright model that enables all contributors to maintain the
