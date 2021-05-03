@@ -79,6 +79,24 @@ function getWidgetManager(voila, kernel) {
                 saveState: {
                     connect: () => {}
                 },
+                /* voila >= 0.2.8 */
+                sessionContext: {
+                    session: {
+                        kernel
+                    },
+                    kernelChanged: {
+                        connect: () => {
+                        }
+                    },
+                    statusChanged: {
+                        connect: () => {
+                        }
+                    },
+                    connectionStatusChanged: {
+                        connect: () => {
+                        }
+                    },
+                },
             };
 
             const settings = {
@@ -138,8 +156,9 @@ window.init = async (voila) => {
     const widgetManager = getWidgetManager(voila, kernel);
 
     if (!window.enable_nbextensions) {
-        const originalLoader = widgetManager.loader;
-        widgetManager.loader = (moduleName, moduleVersion) => {
+        const loaderName = widgetManager.loader ? 'loader' : '_loader';
+        const originalLoader = widgetManager[loaderName];
+        widgetManager[loaderName] = (moduleName, moduleVersion) => {
             if (moduleName === 'jupyter-vuetify' || moduleName === 'jupyter-vue') {
                 requirejs.config({
                     paths: {
