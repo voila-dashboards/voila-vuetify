@@ -12,10 +12,10 @@
 pip install voila-vuetify
 ```
 
-or from conda:
+or from mamba:
 
 ```
-conda install -c conda-forge voila-vuetify
+mamba install -c conda-forge voila-vuetify
 ```
 
 ## Usage
