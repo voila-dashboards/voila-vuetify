@@ -193,6 +193,7 @@ window.init = async (voila) => {
             const model = await modelPromise;
             if (model.name === 'ThemeModel' && themeIsdark !== undefined) {
                 model.set('dark', themeIsdark);
+                model.save_changes();
                 app.$vuetify = original;
             }
             const meta = model.get('_metadata');
