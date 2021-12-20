@@ -19,6 +19,11 @@
 
         {% set nb_title = nb.metadata.get('title', '') or resources['metadata']['name'] %}
 		<title>Voila: {{nb_title}}</title>
+		<style>
+		    .v-application * {
+		        box-sizing: border-box;
+		    }
+		</style>
     </head>
 
     <body data-base-url="{{resources.base_url}}voila/">
