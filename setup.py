@@ -90,7 +90,7 @@ setup(
     version="0.5.3",
     description="A vuetify template for Voila",
     data_files=data_files,
-    install_requires=['voila>=0.2.0,<0.4'],
+    install_requires=['voila>=0.2.0,<0.5'],
     include_package_data=True,
     author='Mario Buikhuizen, Maarten Breddels',
     author_email='mbuikhuizen@gmail.com, maartenbreddels@gmail.com',
